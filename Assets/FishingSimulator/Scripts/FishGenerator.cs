@@ -31,7 +31,7 @@ public class FishGenerator : MonoBehaviour
                 transform.position.y - 10f,
                 transform.position.z + Random.Range(-generateRadius, generateRadius));
             GameObject fish = Instantiate(fishPrefab, randomPos, Quaternion.identity);
-            fish.GetComponent<Rigidbody>().velocity = Random.insideUnitSphere.normalized * swimSpeed;
+            fish.GetComponent<Rigidbody>().velocity = UnityEngine.Random.insideUnitSphere.normalized * swimSpeed;
             fishCount++;
         }
     }
@@ -44,7 +44,7 @@ public class FishGenerator : MonoBehaviour
         foreach (GameObject fish in fishes)
         {
             float distance = Vector3.Distance(fish.transform.position, transform.position);
-            if (fish.transform.position.y  > transform.position.y - 5f || distance > lakeRadius)
+            if (fish.transform.position.y > transform.position.y - 5f || distance > lakeRadius)
             {
                 fish.transform.position = new Vector3(transform.position.x + Random.Range(-100f, 100f),
                     transform.position.y - 10f,

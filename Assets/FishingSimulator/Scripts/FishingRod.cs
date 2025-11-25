@@ -77,7 +77,7 @@ public class FishingRod : MonoBehaviour
                 battleBar.gameObject.SetActive(true);
             }
             // --- battle bar ---
-            if (battleBar.IsActive())
+            if (battleBar.gameObject.activeInHierarchy)
             {
                 battleBarLastUpdateTime += Time.deltaTime;
                 // update 
@@ -104,12 +104,13 @@ public class FishingRod : MonoBehaviour
                 // check if in range
                 float minValue = battleBarCenterOffset + 0.5f - battleBarRandomWidth / 2;
                 float maxValue = battleBarCenterOffset + 0.5f + battleBarRandomWidth / 2;
-                if (battleBar.value < minValue || battleBar.value > maxValue) 
+                if (battleBar.value < minValue || battleBar.value > maxValue)
                 {
                     Debug.Log(minValue + " " + maxValue + " -- " + battleBarTimer);
                     battleBarTimer += Time.deltaTime;
                     alertCanvas.gameObject.SetActive(true);
-                } else
+                }
+                else
                 {
                     alertCanvas.gameObject.SetActive(false);
                 }
@@ -131,7 +132,8 @@ public class FishingRod : MonoBehaviour
                 if (currentLevel > previousLevel)
                 {
                     message += "\nLevel Up!";
-                } else
+                }
+                else
                 {
                     message += "\n+10 Exp";
                 }
@@ -176,8 +178,9 @@ public class FishingRod : MonoBehaviour
                     InitPowerBar();
                 }
                 Casting();
-            } else
-            {   
+            }
+            else
+            {
                 if (isCasting)
                 {
                     Debug.Log("Trigger button is released.");
@@ -246,7 +249,8 @@ public class FishingRod : MonoBehaviour
                             battleBar.value += battleBarIncreaseSpeed * Time.deltaTime;
                         }
                     }
-                } else
+                }
+                else
                 {
                     if (caughtFish != null && battleBar.value > 0)
                     {
@@ -259,7 +263,8 @@ public class FishingRod : MonoBehaviour
             if (device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primaryButton, out primaryButtonValue) && primaryButtonValue)
             {
                 Tutorial.gameObject.SetActive(true);
-            } else
+            }
+            else
             {
                 if (Tutorial.gameObject.activeSelf)
                 {
@@ -305,7 +310,7 @@ public class FishingRod : MonoBehaviour
         // show distance
         TMPDistance.gameObject.SetActive(true);
     }
-    
+
     // deactive fishing hook and fishing line
     void EndFishing()
     {
@@ -349,7 +354,7 @@ public class FishingRod : MonoBehaviour
     {
         Debug.Log("Update level info");
         TextMeshProUGUI levelInfo = levelCanvas.GetComponentInChildren<TextMeshProUGUI>();
-        TextMeshProUGUI expInfo = levelCanvas.GetComponentsInChildren<TextMeshProUGUI>()[1];;
+        TextMeshProUGUI expInfo = levelCanvas.GetComponentsInChildren<TextMeshProUGUI>()[1]; ;
         Slider expSlider = levelCanvas.GetComponentInChildren<Slider>();
         float maxExp = 100 + (playerData.level - 1) * 10;
         levelInfo.text = "LEVEL " + playerData.level;
