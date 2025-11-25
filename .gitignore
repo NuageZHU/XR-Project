@@ -100,3 +100,4 @@ InitTestScene*.unity*
 
 # Wizards Code terrain assets (too large for GitHub)
 /[Aa]ssets/*[Ww]izards*[Cc]ode*/
+/[Aa]ssets/*[Ww]izards*[Cc]ode*.meta
